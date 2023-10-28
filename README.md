@@ -25,4 +25,4 @@
 
 ## Architecture
 
-![Architecture](./assets/architecture.png)
+![Architecture](./architecture.png)
