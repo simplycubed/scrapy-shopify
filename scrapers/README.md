@@ -2,7 +2,7 @@
 
 ```bash
 # execute scraper
-scrapy crawl shopify
+scrapy crawl shopify -o "%(spider_name)s-%(batch_time)s-%(batch_id)s.jsonl"
 
 # validating selectors
 scrapy shell https://apps.shopify.com/inbox
