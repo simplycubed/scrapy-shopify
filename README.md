@@ -24,7 +24,13 @@
 ## Processing
 
 - If the last modified date in the sitemap or page is newer than the last modified date passed into Scrapy, than the page is processed.
+- Images are uploaded to Google Cloud Storage and the public URL is saved to Firestore and BigQuery.
 - New files are imported into Firestore and BigQuery.
+
+## Images
+
+- Images are saved to Google Storage using [Media Pipelines](https://docs.scrapy.org/en/latest/topics/media-pipeline.html#using-the-images-pipeline).
+- Images are converted to JPEG / RGB format
 
 ## Architecture
 
