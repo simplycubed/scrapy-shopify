@@ -32,16 +32,23 @@ class ShopifyCrawler(FilteredSitemapSpider):
         }
 
 
+# ONLY for Testing
+allow_urls = [
+    "https://apps.shopify.com/inbox",
+]
+
 skip_urls = [
-    'https://apps.shopify.com/app-groups/',
-    'https://apps.shopify.com/categories/',
-    'https://apps.shopify.com/collections/',
-    'https://apps.shopify.com/partners/'
-    'https://apps.shopify.com/stories/',
+    "https://apps.shopify.com/app-groups/",
+    "https://apps.shopify.com/categories/",
+    "https://apps.shopify.com/collections/",
+    "https://apps.shopify.com/partners",
+    "https://apps.shopify.com/stories/",
 ]
 
 
 def sitemap_filter(self, entries):
     for entry in entries:
-        if entry.get('loc') not in skip_urls:
+        # ONLY for Testing
+        # if entry.get('loc') not in skip_urls:
+        if entry.get('loc') in allow_urls:
             yield entry

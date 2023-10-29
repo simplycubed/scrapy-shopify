@@ -11,6 +11,8 @@ class ScrapersItem(scrapy.Item):
     categories = scrapy.Field()
     description = scrapy.Field()
     developer = scrapy.Field()
+    image_urls = scrapy.Field()
+    images = scrapy.Field()
     languages = scrapy.Field()
     last_updated = scrapy.Field()
     launched = scrapy.Field()

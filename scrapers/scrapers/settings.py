@@ -62,9 +62,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    "scrapers.pipelines.ScrapersPipeline": 300,
-# }
+ITEM_PIPELINES = {
+    "scrapy.pipelines.images.ImagesPipeline": 1
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -91,3 +91,13 @@ ROBOTSTXT_OBEY = True
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+# FILES_STORE = "gs://saas-co-marketplace/files/"
+GCS_PROJECT_ID = "saas-co"
+IMAGES_STORE = "gs://saas-co-marketplace/images/"
+IMAGES_THUMBS = {
+    "small": (50, 50),
+    "big": (270, 270),
+}
+IMAGES_MIN_HEIGHT = 50
+IMAGES_MIN_WIDTH = 50

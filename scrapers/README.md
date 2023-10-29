@@ -2,7 +2,7 @@
 
 ```bash
 # execute scraper
-scrapy crawl shopify -o apps.json
+scrapy crawl shopify
 
 # validating selectors
 scrapy shell https://apps.shopify.com/inbox
