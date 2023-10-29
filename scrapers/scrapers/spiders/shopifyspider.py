@@ -1,7 +1,7 @@
-from scrapy.spiders import FilteredSitemapSpider
+from scrapy.spiders import SitemapSpider
 
 
-class ShopifyCrawler(FilteredSitemapSpider):
+class ShopifyCrawler(SitemapSpider):
     name = 'shopify'
     allowed_domains = [
         'https://apps.shopify.com'
@@ -35,6 +35,7 @@ class ShopifyCrawler(FilteredSitemapSpider):
 # ONLY for Testing
 allow_urls = [
     "https://apps.shopify.com/inbox",
+    "https://apps.shopify.com/cleverppc"
 ]
 
 skip_urls = [

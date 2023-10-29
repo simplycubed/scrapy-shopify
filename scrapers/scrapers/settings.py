@@ -90,14 +90,27 @@ ITEM_PIPELINES = {
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
-FEED_EXPORT_ENCODING = "utf-8"
 
-# FILES_STORE = "gs://saas-co-marketplace/files/"
-GCS_PROJECT_ID = "saas-co"
-IMAGES_STORE = "gs://saas-co-marketplace/images/"
-IMAGES_THUMBS = {
-    "small": (50, 50),
-    "big": (270, 270),
+FEED_EXPORT_BATCH_ITEM_COUNT = 100
+FEED_EXPORT_ENCODING = "utf-8"
+FEED_EXPORTERS = {
+    "json": None,
+    "jsonlines": "scrapy.exporters.JsonLinesItemExporter",
+    "jsonl": "scrapy.exporters.JsonLinesItemExporter",
+    "jl": "scrapy.exporters.JsonLinesItemExporter",
+    "csv": None,
+    "xml": None,
+    "marshal": None,
+    "pickle": None,
 }
-IMAGES_MIN_HEIGHT = 50
-IMAGES_MIN_WIDTH = 50
+FEED_URI_PARAMS = "scrapers.utils.uri_params"
+
+# GCS_PROJECT_ID = "saas-co"
+# FILES_STORE = "gs://saas-co-marketplace/files/"
+# IMAGES_STORE = "gs://saas-co-marketplace/images/"
+# IMAGES_THUMBS = {
+#     "small": (50, 50),
+#     "big": (270, 270),
+# }
+# IMAGES_MIN_HEIGHT = 50
+# IMAGES_MIN_WIDTH = 50
