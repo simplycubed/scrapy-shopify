@@ -1,6 +1,9 @@
 # Shopify Spider
 
 ```bash
+# execute runner
+python runner.py
+
 # execute scraper
 scrapy crawl shopify -o "%(spider_name)s-%(batch_time)s-%(batch_id)s.jsonl"
 

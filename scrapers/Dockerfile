@@ -43,4 +43,4 @@ USER appuser
 COPY . .
 
 # Run the application.
-CMD scrapy crawl shopify -o "%(spider_name)s-%(batch_time)s-%(batch_id)s.jsonl"
+CMD python runner.py
