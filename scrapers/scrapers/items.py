@@ -31,7 +31,7 @@ class ScrapersItem(scrapy.Item):
     works_with = scrapy.Field()
 
 
-class Price(scrapy.Item):
+class Package(scrapy.Item):
     description = scrapy.Field()
     name = scrapy.Field()
     price = scrapy.Field()
@@ -42,6 +42,8 @@ class Developer(scrapy.Item):
     url = scrapy.Field()
 
 
+# Shopify gives the rating (average)
+# Wordpress gives 1-5 stars, in these cases we need to calculate the average
 class Rating(scrapy.Item):
     average = scrapy.Field()
     five_star = scrapy.Field()
