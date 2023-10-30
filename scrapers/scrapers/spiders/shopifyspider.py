@@ -3,11 +3,13 @@ from scrapy.spiders import SitemapSpider
 from scrapers.items import ScrapersItem
 from scrapers.itemsloaders import ShopifyLoader
 
-# ONLY for Testing
+# Limiting to only 2 URLs for Testing
 allow_urls = [
-    "https://apps.shopify.com/inbox"
+    "https://apps.shopify.com/inbox",
+    "https://apps.shopify.com/tiktok"
 ]
 
+# These URLs do not have apps, skipping
 skip_urls = [
     "https://apps.shopify.com/app-groups/",
     "https://apps.shopify.com/categories/",
@@ -37,10 +39,10 @@ class ShopifyCrawler(SitemapSpider):
                 if substr in entry["loc"]:
                     yield entry
 
+    # TEMP CSS selectors need to be updated and items loaders input processors updated
     def parse_item(self, response):
         l = ShopifyLoader(item=ScrapersItem(), response=response)
-        l.add_css(
-            "categories", "h1::text" # TEMP
+        l.add_css("categories", "h1::text")  # TEMP
         l.add_css("description", "h1::text")  # TEMP
         l.add_css("developer", ".tw-text-body-md .tw-group::text")
         l.add_xpath(
