@@ -2,6 +2,12 @@
 
 - This project uses a single Scrapy project containing all available spiders and scrapers.
 
+## Google Sheet
+
+- [Google Sheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vQp-gB4Wug_6y2P38DPengQA4yZoXL4ajNMpOCsvi9O8hnPSppVoD-fUKqZ6Xd-TVi8yDROk1bxNijU/pubhtml)
+
+![Google Sheet](./google-sheet.png)
+
 ## Proxy
 
 - [Bright Data](https://brightdata.com/) - web scraping platform is our web proxy.
