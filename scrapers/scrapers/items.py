@@ -28,7 +28,7 @@ def to_int(value):
             numeric_part = float(value.replace('K', '').strip())
             return int(numeric_part * 1000)
         elif 'M' in value:
-            numeric_part = float(value.replace('K', '').strip())
+            numeric_part = float(value.replace('M', '').strip())
             return int(numeric_part * 1000000)
         else:
             return int(value)
