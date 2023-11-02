@@ -3,12 +3,6 @@ from scrapy.spiders import SitemapSpider
 from scrapers.items import ScrapersItem, Developer, Package, Rating
 from scrapers.itemsloaders import ShopifyLoader
 
-# Limiting to only 2 URLs for Testing
-allow_urls = [
-    "https://apps.shopify.com/inbox",
-    "https://apps.shopify.com/tiktok"
-]
-
 # These URLs do not have apps, skipping
 skip_urls = [
     "https://apps.shopify.com/app-groups/",
@@ -35,8 +29,8 @@ class ShopifyCrawler(SitemapSpider):
 
     def sitemap_filter(self, entries):
         for entry in entries:
-            for substr in allow_urls:
-                if substr in entry["loc"]:
+            for substr in skip_urls:
+                if substr not in entry["loc"]:
                     yield entry
 
     # TEMP CSS selectors need to be updated and items loaders input processors updated
@@ -46,8 +40,8 @@ class ShopifyCrawler(SitemapSpider):
         p = ShopifyLoader(item=Package(), response=response)
         r = ShopifyLoader(item=Rating(), response=response)
 
-        l.add_xpath("categories", 'normalize-space(//*[@id="adp-details-section"]/div/div/div[1]/div[2]/div/div[3]/span)') # TEMP
-        l.add_xpath("description", 'normalize-space(//*[@id="app-details"])')  # TEMP
+        l.add_xpath("categories", 'normalize-space(//*[@id="adp-details-section"]/div/div/div[1]/div[2]/div/div[3]/span)')
+        l.add_xpath("description", 'normalize-space(//*[@id="app-details"])')
 
         # Update with items.Developer
         d.add_xpath("name", '//*[@id="adp-hero"]/div/div/div[1]/div/div[1]/div[2]/div[2]/div[3]/div/a/text()')
@@ -58,11 +52,11 @@ class ShopifyCrawler(SitemapSpider):
 
         l.add_css(
             "launched", "p:nth-child(2).tw-text-fg-tertiary.tw-text-body-sm::text")
-        l.add_css("logo", ".tw-rounded-sm.tw-block.tw-w-full::attr(src)")  # TEMP
+        l.add_css("logo", ".tw-rounded-sm.tw-block.tw-w-full::attr(src)")
         l.add_css("name", "h1::text")
 
         # Update with items.Package
-        p.add_xpath("name", '//*[@id="adp-pricing"]/div[2]/div[1]/div/div/div/p[1]/text()')  # TEMP 
+        p.add_xpath("name", '//*[@id="adp-pricing"]/div[2]/div[1]/div/div/div/p[1]/text()')
         p.add_xpath("price", '///*[@id="adp-pricing"]/div[2]/div[1]/div/div/div/h3/text()') 
         p.add_xpath("description", '//*[@id="adp-pricing"]/div[2]/div[1]/div/div/ul/text()')
 
@@ -75,8 +69,8 @@ class ShopifyCrawler(SitemapSpider):
         r.add_xpath("one_star", '//*[@id="adp-reviews"]/div/div/div[2]/div[1]/div[1]/div[3]/ul/li[5]/div[3]/a/span/text()')
 
         l.add_css("reviews", "#reviews-link.tw-group.tw-text-link-md::text")
-        l.add_xpath("url", "/html/head/link[1]/@href")  # TEMP
-        l.add_xpath("works_with", '/html/body/main/section[4]/div/div/div[1]/div[2]/div/div[4]/span/a/@href')  # TEMP
+        l.add_xpath("url", "/html/head/link[1]/@href")
+        l.add_xpath("works_with", '/html/body/main/section[4]/div/div/div[1]/div[2]/div/div[4]/span/a/@href')
         l.add_xpath("support", '//*[@id="adp-developer"]/div/div/div/div[2]/p/text()')
 
         l.add_value("developer", d.load_item())
