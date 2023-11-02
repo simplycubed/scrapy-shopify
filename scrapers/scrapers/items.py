@@ -6,13 +6,16 @@
 import scrapy
 from itemloaders.processors import Join, MapCompose, TakeFirst
 
+
 def clean_item(value):
     # Remove leading and trailing spaces and newline characters, as well as spaces within the text
     return value.strip().replace('\n', '').replace(' ', '')
 
+
 def to_array(value):
     value = value.strip("'")  # Remove single quotes around the string
     return [lang.strip().replace('and ', '') for lang in value.split(', ')]
+
 
 def to_float(value):
     try:
@@ -20,9 +23,10 @@ def to_float(value):
         return rating
     except (ValueError, IndexError):
         return None
-    
+
+
 def to_int(value):
-    value = value.strip().replace('\n', '').replace(' ', '')
+    value = value.strip().replace('\n', '').replace(' ', '').upper()
     try:
         if 'K' in value:
             numeric_part = float(value.replace('K', '').strip())
@@ -33,7 +37,8 @@ def to_int(value):
         else:
             return int(value)
     except (ValueError, TypeError):
-        return None  
+        return None
+
 
 class ScrapersItem(scrapy.Item):
     active_installations = scrapy.Field()
